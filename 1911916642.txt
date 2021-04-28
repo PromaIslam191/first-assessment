@@ -1,0 +1,51 @@
+Activity 1
+SELECT b.BOOK_ID, b.TITLE, b.PUBLISHER_NAME, a.AUTHOR_NAME,
+c.NO_OF_COPIES,l.BRANCH_ID
+FROM BOOK b, BOOK_AUTHORS a, BOOK_COPIES c, LIBRARY_BRANCH l
+WHERE b.BOOK_ID=a.BOOK_ID
+AND b.BOOK_ID=c.BOOK_ID
+AND l.BRANCH_ID=c.BRANCH_ID;
+
+Activity 2
+SELECT l.CARD_NO, b.BRANCH_NAME, b.ADDRESS
+FROM book_lending l 
+JOIN  library_branch b ON (b.BRANCH_ID=l.BRANCH_ID)
+WHERE l.DUE_DATE BETWEEN '2017-01-01' AND '2017-07-01'
+HAVING COUNT(l.CARD_NO)>3
+
+Activity 3
+SELECT b.BOOK_ID "id",b.TITLE "title",b.PUBLISHER_NAME "name of publisher", a.AUTHOR_NAME "author"
+FROM book b JOIN book_copies c ON (b.BOOK_ID=c.BOOK_ID) INNER JOIN library_branch lb ON (lb.BRANCH_ID=c.BRANCH_ID) INNER JOIN book_authors a ON (b.BOOK_ID=a.BOOK_ID)
+WHERE c.NO_OF_COPIES=1
+
+Activity 4
+SELECT b.BOOK_ID ,b.TITLE ,b.PUBLISHER_NAME , a.AUTHOR_NAME
+FROM book b JOIN book_copies c ON (b.BOOK_ID = c.BOOK_ID) 
+INNER JOIN library_branch lb ON (lb.BRANCH_ID=c.BRANCH_ID) 
+INNER JOIN book_authors a ON (b.BOOK_ID=a.BOOK_ID)
+WHERE c.NO_OF_COPIES>2 
+AND b.TITLE LIKE 'A%'
+
+Activity 5
+SELECT b.BOOK_ID "id",b.TITLE "title",b.PUBLISHER_NAME "name of publisher", a.AUTHOR_NAME "author"
+FROM book b JOIN book_authors a ON(b.BOOK_ID=a.BOOK_ID) JOIN book_lending l ON (l.BOOK_ID=b.BOOK_ID)
+GROUP BY l.BRANCH_ID
+
+Activity 6
+UPDATE book SET TITLE ='Database Management'
+WHERE TITLE ='DBMS';
+
+Activity 7
+DELETE FROM book
+WHERE BOOK_ID =2;
+
+Activity 8
+CREATE VIEW V_BOOKS AS
+SELECT b.BOOK_ID, b.TITLE, c.NO_OF_COPIES
+FROM BOOK b, BOOK_COPIES c, LIBRARY_BRANCH l
+WHERE b.BOOK_ID = c.BOOK_ID
+AND c.BRANCH_ID = l.BRANCH_ID;
+
+
+
+
